@@ -1,20 +1,20 @@
 ---
 const { BASE_URL } = import.meta.env;
 ---
+
 <header
   class="bg-forge-dark/80 backdrop-blur-sm sticky top-0 z-50 border-b border-white/10"
 >
   <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-    <a href={BASE_URL} class="flex items-center gap-2 no-underline hover:no-underline">
+    <a href="/" class="flex items-center gap-2 no-underline hover:no-underline">
       <span class="w-8 h-8 text-4xl mr-4">🦉</span>
       <span class="font-bold text-white text-lg">Concord Forge Syndicate</span>
     </a>
     <div class="hidden md:flex items-center gap-6 text-sm">
-      <a
-        href={`${BASE_URL}/showcase`}
-        class="hover:text-forge-accent transition-colors">Showcase</a
+      <a href="/showcase" class="hover:text-forge-accent transition-colors"
+        >Showcase</a
       >
-      <a href={`${BASE_URL}/contact`} class="hover:text-forge-accent transition-colors"
+      <a href="/contact" class="hover:text-forge-accent transition-colors"
         >Contact</a
       >
       <div class="flex items-center gap-4">

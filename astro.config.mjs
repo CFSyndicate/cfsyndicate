@@ -13,6 +13,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  site: "https://kru42.github.io/cfsyndicate",
-  base: "/cfsyndicate"
+  site: "https://cfsyndicate.github.io/",
 });
