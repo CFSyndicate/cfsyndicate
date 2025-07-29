@@ -1,0 +1,45 @@
+---
+import MainLayout from "./MainLayout.astro";
+
+// The 'frontmatter' from the MDX file is automatically passed as props
+const { title, description, tags } = Astro.props;
+---
+
+<MainLayout title={title}>
+  <article class="container mx-auto max-w-8xl px-6 py-16">
+    <!-- Header Section for the project -->
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl font-bold text-white">{title}</h1>
+      <p class="text-lg text-forge-text-secondary mt-2">
+        {description}
+      </p>
+      {
+        Array.isArray(tags) && tags.length > 0 && (
+          <div class="flex flex-wrap justify-center gap-2 mt-4">
+            {tags.map((tag: string) => (
+              <span class="text-xs bg-forge-accent/20 text-forge-accent px-3 py-1 rounded-full">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )
+      }
+    </header>
+
+    <!-- Main project content from the MDX file gets injected here -->
+    <div class="prose prose-invert max-w-none prose-h3:text-forge-accent">
+      <slot />
+    </div>
+  </article>
+</MainLayout>
+
+<style is:global>
+  /* Basic styling for content coming from MDX */
+  .prose {
+    line-height: 1.7;
+  }
+  .prose h3 {
+    margin-top: 2em;
+    font-weight: 700;
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import ShowcaseLayout from "../layouts/ShowcaseLayout.astro";
+import ShowcaseCard from "../components/ShowcaseCard.vue";
+
+// Get all entries from the 'showcase' collection
+const projects = await getCollection("showcase");
+---
+
+<ShowcaseLayout title="Showcase">
+  <div class="container mx-auto px-6 py-4">
+    <div class="text-center mb-6">
+      <h1 class="text-4xl">From the Forge</h1>
+      <p class="text-forge-text-secondary mt-2">
+        A look at our concepts and creations.
+      </p>
+    </div>
+    {
+      projects.length === 0 ? (
+        <div class="grid md:grid-cols-3">
+          <div class="col-span-3 flex justify-center items-center py-20">
+            <span class="text-2xl font-semibold">Coming Soon! 🦉</span>
+          </div>
+        </div>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project) => (
+            <ShowcaseCard
+              client:visible
+              title={project.data.title}
+              description={project.data.description}
+              image={project.data.image}
+              tags={project.data.tags}
+              url={`/cfsyndicate/showcase/${project.slug}`}
+            />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</ShowcaseLayout>

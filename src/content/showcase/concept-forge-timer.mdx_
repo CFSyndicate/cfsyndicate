@@ -1,0 +1,14 @@
+---
+title: 'Concept: Forge Timer'
+description: 'A minimalist, cross-platform Pomodoro timer designed for developers.'
+pubDate: 'Jul 29 2024'
+image: '/menacing-owl.png'
+tags: ['Desktop', 'C++', 'Concept']
+---
+
+<img src="/menacing-owl.png" alt="The owl mascot" style={{ width: '100px', height: '140px' }} />
+
+### The Idea
+A simple, no-fuss desktop timer that stays out of your way but keeps you on track.
+
+We imagined a tool built with native performance in mind for both Windows and Linux, featuring a clean, geometric interface inspired by our own brand.

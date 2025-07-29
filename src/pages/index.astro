@@ -1,0 +1,111 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import "../styles/global.css";
+---
+
+<MainLayout title="Home">
+  <!-- Hero Section -->
+  <section class="text-center py-20 md:py-32 px-6 bg-grid-pattern">
+    <div class="w-24 h-32 mx-auto mb-6 text-5xl">
+      <span>🦉</span>
+    </div>
+    <h1 class="text-4xl md:text-6xl mb-4 text-white">
+      Concord Forge Syndicate
+    </h1>
+    <p class="text-lg md:text-xl max-w-2xl mx-auto text-forge-text">
+      Code crafted strong. Design refined sharp. Ideas forged into solutions.
+    </p>
+  </section>
+
+  <!-- What We Do Section -->
+  <section class="py-16 bg-black/50">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl mb-10">
+        From Desktop to the Web, We Build It Right.
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="bg-white/5 p-8 rounded-lg border border-white/10">
+          <h3 class="text-xl text-forge-accent mb-2">Desktop Applications</h3>
+          <p class="text-forge-text-secondary">
+            Reliable and performant applications for Windows and Linux, tailored
+            to your workflow.
+          </p>
+        </div>
+        <!-- Card 2 -->
+        <div class="bg-white/5 p-8 rounded-lg border border-white/10">
+          <h3 class="text-xl text-forge-accent mb-2">Web Services & APIs</h3>
+          <p class="text-forge-text-secondary">
+            Secure, scalable backends and APIs built with Python, JavaScript,
+            and modern frameworks.
+          </p>
+        </div>
+        <!-- Card 3 -->
+        <div class="bg-white/5 p-8 rounded-lg border border-white/10">
+          <h3 class="text-xl text-forge-accent mb-2">Web Apps & Interfaces</h3>
+          <p class="text-forge-text-secondary">
+            Clean, intuitive, and fast user interfaces using modern web
+            technologies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Toolkit Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl mb-10">Our Toolkit</h2>
+      <div
+        class="flex flex-wrap justify-center items-center gap-4 text-forge-text-secondary"
+      >
+        <!-- You can create a simple Icon component for these -->
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >Python</span
+        >
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >C++</span
+        >
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >Qt</span
+        >
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >JavaScript</span
+        >
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >React</span
+        >
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >Nodejs</span
+        >
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >C# / .NET</span
+        >
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >Entity Framework</span
+        >
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >Vue.js</span
+        >
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >Win32</span
+        >
+        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          >Linux</span
+        >
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .bg-grid-pattern {
+    background-color: #000000;
+    background-image: linear-gradient(
+        rgba(225, 93, 2, 0.1) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(225, 93, 2, 0.1) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+  }
+</style>

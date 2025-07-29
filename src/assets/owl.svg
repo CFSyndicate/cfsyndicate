@@ -1,0 +1,23 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 100 100"
+    aria-labelledby="logoTitle"
+    role="img">
+
+    <title id="logoTitle">Minimalist Geometric Owl Logo</title>
+
+    <path
+        d="
+       M 50 95 L 15 50 L 30 10 L 50 30 L 70 10 L 85 50 Z
+       M 40 45 L 30 60
+       M 60 45 L 70 60
+       M 50 40 L 50 65
+    "
+        fill="none"
+        stroke="currentColor"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    />
+
+</svg>
