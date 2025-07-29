@@ -64,11 +64,14 @@ const submitForm = async () => {
 
   try {
     // IMPORTANT: Replace with our actual API endpoint
-    const response = await axios.post("https://YOUR_API_ENDPOINT/feedback", {
-      email: email.value,
-      name: name.value,
-      message: message.value,
-    });
+    const response = await axios.post(
+      "https://form-handler-api.onrender.com/submit",
+      {
+        email: email.value,
+        name: name.value,
+        message: message.value,
+      }
+    );
 
     console.log("Message sent successfully:", response.data);
     formStatus.value = "success";
