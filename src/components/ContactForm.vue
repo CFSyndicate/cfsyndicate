@@ -63,7 +63,7 @@ const submitForm = async () => {
   formStatus.value = "sending";
 
   try {
-    // IMPORTANT: Replace with your actual API endpoint
+    // IMPORTANT: Replace with our actual API endpoint
     const response = await axios.post("https://YOUR_API_ENDPOINT/feedback", {
       email: email.value,
       name: name.value,

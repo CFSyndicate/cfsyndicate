@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
 const showcaseCollection = defineCollection({
   // Type-check frontmatter using a schema
@@ -20,5 +20,5 @@ const showcaseCollection = defineCollection({
 });
 
 export const collections = {
-  'showcase': showcaseCollection,
+  showcase: showcaseCollection,
 };

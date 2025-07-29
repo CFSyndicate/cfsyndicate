@@ -1,12 +1,11 @@
 ---
-const { BASE_URL } = import.meta.env;
 ---
 
 <header
   class="bg-forge-dark/80 backdrop-blur-sm sticky top-0 z-50 border-b border-white/10"
 >
   <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-    <a href="/" class="flex items-center gap-2 no-underline hover:no-underline">
+    <a href="/home" class="flex items-center gap-2 no-underline hover:no-underline">
       <span class="w-8 h-8 text-4xl mr-4">🦉</span>
       <span class="font-bold text-white text-lg">Concord Forge Syndicate</span>
     </a>
@@ -64,11 +63,11 @@ const { BASE_URL } = import.meta.env;
   </nav>
   <div id="mobile-menu" class="hidden md:hidden">
     <a
-      href={`${BASE_URL}/showcase`}
+      href="/showcase"
       class="block py-2 px-4 text-sm text-white hover:bg-gray-700">Showcase</a
     >
     <a
-      href={`${BASE_URL}/contact`}
+      href="/contact"
       class="block py-2 px-4 text-sm text-white hover:bg-gray-700">Contact</a
     >
     <div class="flex items-center gap-4 p-4">
