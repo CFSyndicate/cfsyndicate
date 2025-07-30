@@ -1,5 +1,68 @@
 import * as htmlToImage from "html-to-image";
 
+const titles = [
+    "The",
+    "Lord",
+    "Lady",
+    "Sir",
+    "Elder",
+    "Agent",
+    "Captain",
+    "",
+];
+
+const adjectives = [
+    "Clever",
+    "Wise",
+    "Silent",
+    "Swift",
+    "Ancient",
+    "Golden",
+    "Iron",
+    "Stout",
+    "Keen",
+    "Shadow",
+    "Runic",
+    "Arcane",
+    "Gilded",
+    "Sturdy",
+    "Ashen",
+    "Sable",
+    "Wired",
+    "Digital",
+    "Forged",
+    "Hollow",
+    "Vigilant",
+    "First",
+    "Last",
+];
+
+const nouns = [
+    "Owl",
+    "Forge",
+    "Anvil",
+    "Talon",
+    "Feather",
+    "Rune",
+    "Hammer",
+    "Spark",
+    "Heart",
+    "Wing",
+    "Cinder",
+    "Ember",
+    "Codex",
+    "Glyph",
+    "Circuit",
+    "Matrix",
+    "Sentinel",
+    "Guardian",
+    "Key",
+    "Core",
+    "Spire",
+    "Vertex",
+    "Cipher",
+];
+
 export function stringToHash(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -229,6 +292,7 @@ export function makeOwlInteractive(container) {
 }
 
 export function forgeAndDisplay(container, stringSeed) {
+    const seedDisplay = document.getElementById("current-seed-display");
     const numericSeed = stringToHash(stringSeed); // Convert string to number
     generateOwl(container, numericSeed);
     if (container === owlCanvas) {

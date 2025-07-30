@@ -76,5 +76,18 @@ import "../styles/global.css";
 <script>
   import { fetchAndRenderOwls } from "../lib/owls";
 
-  document.addEventListener("astro:page-load", fetchAndRenderOwls);
+  document.addEventListener("astro:after-swap", () => {
+    // We need to specifically check if the grid container exists on the new page.
+    // This ensures this function only runs when we've navigated to the aviary.
+    const gridContainer = document.getElementById("owl-grid-container");
+    if (gridContainer) {
+      fetchAndRenderOwls();
+    }
+  });
+
+  // Also, ensure fetchAndRenderOwls runs on the initial page load for users
+  // who land directly on the aviary page without transitioning.
+  if (document.getElementById("owl-grid-container")) {
+    fetchAndRenderOwls();
+  }
 </script>

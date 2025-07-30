@@ -229,70 +229,10 @@ import "../styles/global.css";
       generateMemorableSeed,
       generateShareableImage,
       forgeAndDisplay,
+      makeOwlInteractive,
     } from "../lib/owls";
 
-    const titles = [
-      "The",
-      "Lord",
-      "Lady",
-      "Sir",
-      "Elder",
-      "Agent",
-      "Captain",
-      "",
-    ];
-    const adjectives = [
-      "Clever",
-      "Wise",
-      "Silent",
-      "Swift",
-      "Ancient",
-      "Golden",
-      "Iron",
-      "Stout",
-      "Keen",
-      "Shadow",
-      "Runic",
-      "Arcane",
-      "Gilded",
-      "Sturdy",
-      "Ashen",
-      "Sable",
-      "Wired",
-      "Digital",
-      "Forged",
-      "Hollow",
-      "Vigilant",
-      "First",
-      "Last",
-    ];
-    const nouns = [
-      "Owl",
-      "Forge",
-      "Anvil",
-      "Talon",
-      "Feather",
-      "Rune",
-      "Hammer",
-      "Spark",
-      "Heart",
-      "Wing",
-      "Cinder",
-      "Ember",
-      "Codex",
-      "Glyph",
-      "Circuit",
-      "Matrix",
-      "Sentinel",
-      "Guardian",
-      "Key",
-      "Core",
-      "Spire",
-      "Vertex",
-      "Cipher",
-    ];
-
-    document.addEventListener("astro:page-load", () => {
+    document.addEventListener("astro:page-load", async (event) => {
       // Get all elements
       const heroContainer = document.getElementById("hero-owl");
       const owlCanvas = document.getElementById("owlCanvas");
