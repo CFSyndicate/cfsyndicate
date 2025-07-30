@@ -74,27 +74,58 @@ import "../styles/global.css";
       <div
         class="flex flex-wrap justify-center items-center gap-4 text-forge-text-secondary"
       >
-        <!-- You can create a simple Icon component for these -->
-        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
-          >Python</span
+        <span
+          class="inline-flex items-center gap-x-2 bg-white/5 px-3 py-2 rounded-full border border-white/10"
         >
-        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
-          >C++</span
+          <img
+            class="h-4 w-4"
+            src="/cfsyndicate/lang/python.svg"
+            alt="Python Logo"
+          />
+          Python
+        </span>
+        <span
+          class="inline-flex items-center gap-x-2 bg-white/5 px-3 py-2 rounded-full border border-white/10"
         >
-        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
-          >Qt</span
+          <img class="h-4 w-4" src="/cfsyndicate/lang/cpp.svg" alt="C++ Logo" />
+          C++</span
         >
-        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
-          >JavaScript</span
+        <span
+          class="inline-flex items-center gap-x-2 bg-white/5 px-3 py-2 rounded-full border border-white/10"
         >
-        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
-          >C# / .NET</span
+          <img class="h-4 w-4" src="/cfsyndicate/lang/cpp.svg" alt="C++ Logo" />
+          C++</span
         >
-        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
-          >Win32</span
+        <span
+          class="inline-flex items-center gap-x-2 bg-white/5 px-3 py-2 rounded-full border border-white/10"
         >
-        <span class="bg-white/5 px-4 py-2 rounded-full border border-white/10"
-          >Linux</span
+          <img
+            class="h-4 w-4"
+            src="/cfsyndicate/lang/csharp.svg"
+            alt="C++ Logo"
+          />
+          C# / .NET</span
+        >
+
+        <span
+          class="inline-flex items-center gap-x-2 bg-white/5 px-3 py-2 rounded-full border border-white/10"
+        >
+          <img
+            class="h-4 w-4"
+            src="/cfsyndicate/lang/windows.svg"
+            alt="C++ Logo"
+          />
+          Windows</span
+        >
+        <span
+          class="inline-flex items-center gap-x-2 bg-white/5 px-3 py-2 rounded-full border border-white/10"
+        >
+          <img
+            class="h-4 w-4"
+            src="/cfsyndicate/lang/linux.svg"
+            alt="C++ Logo"
+          />
+          Linux</span
         >
       </div>
     </div>
@@ -181,7 +212,7 @@ import "../styles/global.css";
     async function generateShareableImage(
       targetContainer,
       seed,
-      shareImagePreview,
+      shareImagePreview
     ) {
       const owlColorHex = targetContainer.dataset.owlColor;
       const random = mulberry32(stringToHash(seed));
