@@ -141,92 +141,304 @@
       0 0 36px rgba(255, 255, 255, 0.5);
   }
 
-  .punchline {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: larger;
-     text-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.9),
-      0 4px 12px rgba(0, 0, 0, 0.85),
-      0 6px 20px rgba(0, 0, 0, 0.8),
-      0 8px 32px rgba(0, 0, 0, 0.75),
-      0 12px 48px rgba(0, 0, 0, 0.7); /* ← smoky aura */
+/* AGGRESSIVE PUNCHLINE FIX - Replace your existing punchline styles */
+
+.punchline {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700; /* Increased from 600 to 700 */
+  font-size: larger;
+  color: #ffffff; /* Pure white instead of gray */
+  line-height: 1.5;
+  
+  /* MUCH stronger text shadow stack for definition */
+  text-shadow:
+    /* Ultra-strong black backdrop */
+    0 0 20px rgba(0, 0, 0, 1),
+    0 4px 8px rgba(0, 0, 0, 1),
+    0 8px 16px rgba(0, 0, 0, 0.95),
+    0 12px 24px rgba(0, 0, 0, 0.9),
+    0 16px 32px rgba(0, 0, 0, 0.85),
+    /* White outline for crispness */
+    0 0 2px rgba(255, 255, 255, 0.5),
+    0 0 4px rgba(255, 255, 255, 0.3);
   }
 
   .punchline > span {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
   }
 
-  .highlight-strong {
-    background: linear-gradient(45deg, #E15D02, #FF7E29, #FFD27F);
-    font-weight: 700;
-    text-shadow: 0 0 6px rgba(198, 77, 0, 0.7), 0 0 12px rgba(198, 77, 0, 0.5);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  /* REWRITTEN HIGHLIGHT CLASSES - Much Brighter */
+
+.highlight-strong {
+  text-shadow: none;
+  /* Ultra-bright fire gradient */
+  background: linear-gradient(45deg, 
+    #FF2D00,    /* Bright red-orange */
+    #FF4500,    /* Orange red */
+    #FF6B1A,    /* Bright orange */
+    #FF8C00,    /* Dark orange */
+    #FFA500,    /* Orange */
+    #FFD700     /* Gold */
+  );
+  font-weight: 800;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Multiple intense glows for maximum visibility */
+  filter: 
+    drop-shadow(0 0 4px rgba(255, 45, 0, 1))      /* Inner red glow */
+    drop-shadow(0 0 8px rgba(255, 69, 0, 0.9))    /* Orange glow */
+    drop-shadow(0 0 12px rgba(255, 107, 26, 0.8)) /* Bright orange */
+    drop-shadow(0 0 16px rgba(255, 165, 0, 0.6))  /* Gold glow */
+    drop-shadow(0 0 20px rgba(255, 215, 0, 0.4))  /* Outer gold */
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 1));      /* Black shadow for definition */
+  
+  animation: strong-blaze 2.5s infinite ease-in-out;
+}
+
+.highlight-sharp {
+  text-shadow: none;
+  /* Ultra-bright metallic chrome gradient */
+  background: linear-gradient(145deg, 
+    #ffffff,    /* Pure white */
+    #f8f9fa,    /* Off white */
+    #e9ecef,    /* Light gray */
+    #dee2e6,    /* Silver */
+    #ced4da,    /* Light steel */
+    #adb5bd     /* Steel blue */
+  );
+  font-weight: 800;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Intense metallic shine effects */
+  filter: 
+    drop-shadow(0 0 2px rgba(255, 255, 255, 1))    /* White core */
+    drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))  /* White glow */
+    drop-shadow(0 0 10px rgba(248, 249, 250, 0.6)) /* Silver shine */
+    drop-shadow(0 0 14px rgba(233, 236, 239, 0.4)) /* Outer silver */
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9))      /* Sharp shadow */
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));     /* Depth shadow */
+  
+  animation: sharp-gleam 3s infinite ease-in-out;
+}
+
+.highlight-solutions {
+  text-shadow: none;
+  /* Pure bright white with intense blue-white glow */
+  color: #ffffff;
+  font-weight: 800;
+  
+  /* Maximum intensity blue-white glow stack */
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 1),           /* Core white */
+    0 0 6px rgba(173, 216, 230, 1),           /* Light blue glow */
+    0 0 10px rgba(135, 206, 250, 0.9),        /* Sky blue */
+    0 0 14px rgba(176, 196, 222, 0.8),        /* Light steel blue */
+    0 0 18px rgba(255, 255, 255, 0.9),        /* White outer glow */
+    0 0 22px rgba(255, 255, 255, 0.7),        /* Extended white */
+    0 0 26px rgba(173, 216, 230, 0.5),        /* Soft blue aura */
+    0 2px 4px rgba(0, 0, 0, 1);               /* Black definition shadow */
+  
+  animation: solutions-pulse 2s infinite ease-in-out;
+}
+
+/* ENHANCED ANIMATIONS */
+
+@keyframes strong-blaze {
+  0%, 100% { 
+    filter: 
+      drop-shadow(0 0 4px rgba(255, 45, 0, 1))
+      drop-shadow(0 0 8px rgba(255, 69, 0, 0.9))
+      drop-shadow(0 0 12px rgba(255, 107, 26, 0.8))
+      drop-shadow(0 0 16px rgba(255, 165, 0, 0.6))
+      drop-shadow(0 0 20px rgba(255, 215, 0, 0.4))
+      drop-shadow(0 2px 4px rgba(0, 0, 0, 1));
+  }
+  50% { 
+    filter: 
+      drop-shadow(0 0 6px rgba(255, 45, 0, 1))
+      drop-shadow(0 0 12px rgba(255, 69, 0, 1))
+      drop-shadow(0 0 18px rgba(255, 107, 26, 0.9))
+      drop-shadow(0 0 24px rgba(255, 165, 0, 0.8))
+      drop-shadow(0 0 30px rgba(255, 215, 0, 0.6))
+      drop-shadow(0 2px 4px rgba(0, 0, 0, 1));
+  }
+}
+
+@keyframes sharp-gleam {
+  0%, 100% { 
+    filter: 
+      drop-shadow(0 0 2px rgba(255, 255, 255, 1))
+      drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))
+      drop-shadow(0 0 10px rgba(248, 249, 250, 0.6))
+      drop-shadow(0 0 14px rgba(233, 236, 239, 0.4))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9))
+      drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+  }
+  33% { 
+    filter: 
+      drop-shadow(0 0 4px rgba(255, 255, 255, 1))
+      drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))
+      drop-shadow(0 0 12px rgba(248, 249, 250, 0.7))
+      drop-shadow(0 0 16px rgba(233, 236, 239, 0.5))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9))
+      drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+  }
+  66% { 
+    filter: 
+      drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+      drop-shadow(0 0 10px rgba(255, 255, 255, 1))
+      drop-shadow(0 0 14px rgba(248, 249, 250, 0.8))
+      drop-shadow(0 0 18px rgba(233, 236, 239, 0.6))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9))
+      drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+  }
+}
+
+@keyframes solutions-pulse {
+  0%, 100% { 
     text-shadow:
-      0 0 6px rgba(225, 93, 2, 0.8),
-      0 0 12px rgba(255, 126, 41, 0.6),
-      0 0 20px rgba(255, 210, 127, 0.4);
-    animation: ember-flicker 2s infinite ease-in-out;
+      0 0 2px rgba(255, 255, 255, 1),
+      0 0 6px rgba(173, 216, 230, 1),
+      0 0 10px rgba(135, 206, 250, 0.9),
+      0 0 14px rgba(176, 196, 222, 0.8),
+      0 0 18px rgba(255, 255, 255, 0.9),
+      0 0 22px rgba(255, 255, 255, 0.7),
+      0 0 26px rgba(173, 216, 230, 0.5),
+      0 2px 4px rgba(0, 0, 0, 1);
   }
-
-  .highlight-sharp {
-    background: linear-gradient(145deg, #f0f0f0, #a8a8a8, #5a5a5a);
-    font-weight: 700;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  50% { 
     text-shadow:
-      0 1px 1px rgba(255,255,255,0.6),
-      0 2px 2px rgba(0,0,0,0.4);
+      0 0 4px rgba(255, 255, 255, 1),
+      0 0 8px rgba(173, 216, 230, 1),
+      0 0 14px rgba(135, 206, 250, 1),
+      0 0 18px rgba(176, 196, 222, 0.9),
+      0 0 22px rgba(255, 255, 255, 1),
+      0 0 28px rgba(255, 255, 255, 0.8),
+      0 0 34px rgba(173, 216, 230, 0.7),
+      0 2px 4px rgba(0, 0, 0, 1);
   }
+}
 
-  .highlight-solutions {
+  /* ALTERNATIVE: Semi-transparent backdrop approach */
+  .punchline-backdrop {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: larger;
     color: #ffffff;
+    
+    /* Add a subtle dark panel behind the text */
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    
+    /* Simpler shadow since we have backdrop */
     text-shadow:
-      0 0 6px rgba(173, 216, 230, 0.7),
-      0 0 14px rgba(173, 216, 230, 0.5),
-      0 0 22px rgba(255, 255, 255, 0.6);
-    font-weight: 700;
+      0 2px 4px rgba(0, 0, 0, 0.8),
+      0 0 8px rgba(255, 255, 255, 0.2);
   }
 
-  @keyframes ember-flicker {
-    0%, 100% { text-shadow:
-      0 0 6px rgba(225, 93, 2, 0.8),
-      0 0 12px rgba(255, 126, 41, 0.6),
-      0 0 20px rgba(255, 210, 127, 0.4);
-    }
-    50% { text-shadow:
-      0 0 8px rgba(225, 93, 2, 1),
-      0 0 16px rgba(255, 126, 41, 0.8),
-      0 0 26px rgba(255, 210, 127, 0.6);
-    }
-  }
-
-  /* 💡 solutions – white clarity */
-  .highlight-solutions {
+  /* NUCLEAR OPTION: Maximum contrast with background overlay */
+  .punchline-nuclear {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: larger;
     color: #ffffff;
+    position: relative;
+    z-index: 10;
+    
+    /* Add dark overlay specifically behind punchline */
+    background: 
+      radial-gradient(ellipse at center, 
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.6) 40%,
+        rgba(0, 0, 0, 0.3) 70%,
+        transparent 100%);
+    
+    padding: 2rem;
+    border-radius: 16px;
+    
+    text-shadow:
+      0 0 20px rgba(0, 0, 0, 1),
+      0 4px 8px rgba(0, 0, 0, 1),
+      0 0 4px rgba(255, 255, 255, 0.4);
   }
 }
 
 /* ===============================
   Hero background: forge image + grid
   =============================== */
+  /* HERO BACKGROUND FIX - Replace your existing .bg-hero styles */
+
 .bg-hero {
-  /* Layer 1: 1024×1536 forge/anvil PNG
-     Layer 2: the orange grid pattern */
-  background-image:
-    url("/cfsyndicate/forge/forge.png"),
-    linear-gradient(rgba(225, 93, 2, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(225, 93, 2, 0.1) 1px, transparent 1px);
+  position: relative;
+  background: url('/cfsyndicate/forge/forge.png') no-repeat center center;
+  background-size: cover;
+}
 
-  /* Center & cover the forge image,
-     then tile the grid on top: */
-  background-position: center center, center center, center center;
-  background-size: cover, 3rem 3rem, 3rem 3rem;
+.bg-hero * {
+  filter: none !important;
+  backdrop-filter: none !important;
+}
 
-  /* no-repeat for the forge image, grid should repeat */
-  background-repeat: no-repeat, repeat, repeat;
+.bg-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1; /* Keep this BELOW the text content */
+
+  background:
+    /* Much lighter overlay - reduced opacity */
+    radial-gradient(
+      ellipse at center,
+      rgba(225, 93, 2, 0.08) 0%,  /* Reduced from 0.15 to 0.08 */
+      rgba(15, 15, 16, 0) 60%
+    ),
+    /* Lighter bottom gradient */
+    linear-gradient(
+      to bottom,
+      rgba(15, 15, 16, 0) 40%,
+      rgba(25, 18, 16, 0.3) 75%,   /* Reduced from 0.5 to 0.3 */
+      rgba(15, 15, 16, 0.6) 100%   /* Reduced from 0.85 to 0.6 */
+    );
+}
+
+/* ENSURE TEXT IS ABOVE THE OVERLAY */
+.bg-hero > * {
+  position: relative;
+  z-index: 10; /* Put all hero content ABOVE the overlay */
+}
+
+/* Alternative: Remove backdrop-filter if it exists */
+.bg-hero::after {
+  /* Remove any backdrop-filter that might be causing blur */
+  backdrop-filter: none !important;
+  filter: none !important;
+}
+
+/* OPTIONAL: If you want to keep some background effect but not blur the text */
+.bg-hero-clean::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  
+  /* Much subtler overlay that won't interfere with text */
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
 }
 
 @media (min-width: 768px) {

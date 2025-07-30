@@ -24,7 +24,7 @@ import "../styles/global.css";
     </h1>
 
     <p
-      class="punchline text-xl md:text-3xl max-w-2xl mx-auto text-forge-text mt-8 md:mt-16 noselect"
+      class="punchline text-xl md:text-3xl max-w-2xl mx-auto text-white mt-8 md:mt-16 noselect"
       style="font-family: 'Poppins', sans-serif;"
     >
       <span>Code crafted <span class="highlight-strong">strong</span>.</span>
@@ -103,47 +103,47 @@ import "../styles/global.css";
       </div>
     </div>
   </section>
-</MainLayout>
 
-<style>
-  .bg-grid-pattern {
-    background-color: #000000;
-    background-image: linear-gradient(
-        rgba(225, 93, 2, 0.1) 1px,
-        transparent 1px
-      ),
-      linear-gradient(90deg, rgba(225, 93, 2, 0.1) 1px, transparent 1px);
-    background-size: 3rem 3rem;
-  }
-</style>
+  <style>
+    .bg-grid-pattern {
+      background-color: #000000;
+      background-image: linear-gradient(
+          rgba(225, 93, 2, 0.1) 1px,
+          transparent 1px
+        ),
+        linear-gradient(90deg, rgba(225, 93, 2, 0.1) 1px, transparent 1px);
+      background-size: 3rem 3rem;
+    }
+  </style>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const owl = document.querySelector(".owl-emoji");
-    // Removed eyelids and blinking logic
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const owl = document.querySelector(".owl-emoji");
+      // Removed eyelids and blinking logic
 
-    let clickCount = 0;
+      let clickCount = 0;
 
-    owl.addEventListener("click", () => {
-      clickCount++;
+      owl.addEventListener("click", () => {
+        clickCount++;
 
-      // Always do shake animation
-      owl.classList.add("owl-shake");
-      setTimeout(() => owl.classList.remove("owl-shake"), 400);
+        // Always do shake animation
+        owl.classList.add("owl-shake");
+        setTimeout(() => owl.classList.remove("owl-shake"), 400);
 
-      // On 5th click, do hoot animation
-      if (clickCount === 5) {
-        // Add hoot class
-        owl.classList.add("owl-hoot");
+        // On 5th click, do hoot animation
+        if (clickCount === 5) {
+          // Add hoot class
+          owl.classList.add("owl-hoot");
 
-        // Remove hoot class after animation ends
-        setTimeout(() => {
-          owl.classList.remove("owl-hoot");
-        }, 1000);
+          // Remove hoot class after animation ends
+          setTimeout(() => {
+            owl.classList.remove("owl-hoot");
+          }, 1000);
 
-        // Reset counter
-        clickCount = 0;
-      }
+          // Reset counter
+          clickCount = 0;
+        }
+      });
     });
-  });
-</script>
+  </script>
+</MainLayout>
