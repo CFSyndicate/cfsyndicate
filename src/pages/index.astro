@@ -158,18 +158,57 @@ import "../styles/global.css";
         />
       </div>
 
-      <button
-        id="regenOwl"
-        class="mt-4 px-4 py-2 bg-forge-accent text-black rounded-lg hover:bg-orange-500 transition"
-      >
-        Forge Owl
-      </button>
-      <button
-        id="shareOwlBtn"
-        class="mt-4 ml-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition"
-      >
-        Share Owl
-      </button>
+      <div class="mt-6 flex flex-wrap justify-center gap-2">
+        <!-- The main "Forge" button -->
+        <button
+          id="regenOwl"
+          class="px-6 py-2 bg-orange-500 text-black font-bold rounded-lg hover:bg-orange-400 active:scale-95 transition-all"
+        >
+          Forge New Owl
+        </button>
+
+        <!-- NEW: The "Save to Gallery" Button -->
+        <button
+          id="saveOwlBtn"
+          class="group relative flex items-center justify-center gap-2 px-6 py-2 bg-slate-800 text-slate-300 font-semibold rounded-lg border border-slate-700
+           hover:border-orange-500 hover:bg-slate-700 hover:text-white
+           active:scale-95
+           disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed
+           transition-all duration-200 ease-in-out"
+        >
+          <!-- Spinner (hidden by default) -->
+          <svg
+            class="animate-spin h-5 w-5 text-slate-500 hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+
+          <!-- Button Text -->
+          <span class="button-text">Save to Gallery</span>
+        </button>
+
+        <!-- The "Share" button -->
+        <button
+          id="shareOwlBtn"
+          class="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 active:scale-95 transition-all"
+        >
+          Share Owl
+        </button>
+      </div>
     </div>
   </section>
 
@@ -188,6 +227,16 @@ import "../styles/global.css";
   <script>
     import * as htmlToImage from "html-to-image";
 
+    const titles = [
+      "The",
+      "Lord",
+      "Lady",
+      "Sir",
+      "Elder",
+      "Agent",
+      "Captain",
+      "",
+    ];
     const adjectives = [
       "Clever",
       "Wise",
@@ -199,6 +248,19 @@ import "../styles/global.css";
       "Stout",
       "Keen",
       "Shadow",
+      "Runic",
+      "Arcane",
+      "Gilded",
+      "Sturdy",
+      "Ashen",
+      "Sable",
+      "Wired",
+      "Digital",
+      "Forged",
+      "Hollow",
+      "Vigilant",
+      "First",
+      "Last",
     ];
     const nouns = [
       "Owl",
@@ -211,6 +273,19 @@ import "../styles/global.css";
       "Spark",
       "Heart",
       "Wing",
+      "Cinder",
+      "Ember",
+      "Codex",
+      "Glyph",
+      "Circuit",
+      "Matrix",
+      "Sentinel",
+      "Guardian",
+      "Key",
+      "Core",
+      "Spire",
+      "Vertex",
+      "Cipher",
     ];
 
     async function generateShareableImage(
@@ -258,12 +333,12 @@ import "../styles/global.css";
       }
     }
 
-    // NEW: Generates a memorable seed like "Wise-Talon-77"
     function generateMemorableSeed() {
+      const title = titles[Math.floor(Math.random() * titles.length)];
       const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
       const noun = nouns[Math.floor(Math.random() * nouns.length)];
-      const num = Math.floor(Math.random() * 99) + 1;
-      return `${adj}-${noun}-${num}`;
+      const num = Math.floor(Math.random() * 999) + 1; // Increased number range
+      return title ? `${title} ${adj} ${noun}-${num}` : `${adj}-${noun}-${num}`;
     }
 
     // NEW: Converts any string into a consistent 32-bit integer for the generator
@@ -300,21 +375,20 @@ import "../styles/global.css";
       const shareImagePreview = document.getElementById("share-image-preview");
       const shareTwitter = document.getElementById("share-twitter");
       const shareBsky = document.getElementById("share-bsky");
+      const saveBtn = document.getElementById("saveOwlBtn");
 
-      // UPDATED: Generator function with dynamic shapes and "puffy" filter
       function generateOwl(container, numericSeed) {
         const random = mulberry32(numericSeed);
 
-        // --- NEW: Shape-modifying variables based on the seed ---
-        // 1. Body Width: Controls how fat or thin the owl is. (e.g., 0.8 to 1.2)
-        const bodyWidthFactor = 0.8 + random() * 0.4;
-        // 2. Puffiness: A 40% chance for an owl to be "puffy".
-        const isPuffy = random() > 0.6;
-        // Random values for the puffiness filter's intensity and texture
-        const puffinessScale = 5 + random() * 5; // How much to displace the edges
-        const puffinessFrequency = 0.05 + random() * 0.05; // The "grain" of the fluff
+        // --- Procedural Generation Flags ---
+        const gender = numericSeed % 2 === 0 ? "Male" : "Female";
+        const hasBellyPattern = random() > 0.5; // 50% chance for belly markings
+        const hasRune = random() > 0.7; // 30% chance for a forehead rune
+        const hasCheekBlush = random() > 0.6; // 40% chance for blush
 
-        // --- Palettes and Random Values ---
+        container.dataset.owlGender = gender;
+
+        // --- Palettes & Colors ---
         const bodyColors = [
           "#6b4226",
           "#4b3621",
@@ -323,22 +397,29 @@ import "../styles/global.css";
           "#42342b",
         ];
         const bellyColors = ["#f4e1c1", "#e8d3a8", "#fff2d1", "#f5deb3"];
-        const eyeColors = ["#fff", "#f9f9f9", "#fffcf2"];
+        const maleEyeColors = ["#fff", "#f9f9f9", "#fffcf2"];
+        const femaleEyeColors = ["#fff2d1", "#f5e8d3", "#fff9e3"]; // Softer for females
         const irisColors = ["#2c2c2c", "#3b2f2f", "#1b1b1b", "#4a3c2a"];
         const beakAndFeetColor = "#e09f3e";
+        const blushColor = "rgba(224, 122, 95, 0.4)"; // A soft, rosy blush color
 
+        // --- Procedural Values ---
         const eyeSize = random() * 6 + 12;
+        const bodyWidthFactor = 0.8 + random() * 0.4;
+        const isPuffy = random() > 0.6;
         const owlBodyColor =
           bodyColors[Math.floor(random() * bodyColors.length)];
         const wingColor = bodyColors[Math.floor(random() * bodyColors.length)];
         const bellyColor =
           bellyColors[Math.floor(random() * bellyColors.length)];
-        const eyeColor = eyeColors[Math.floor(random() * eyeColors.length)];
+        const eyeColor = (
+          gender === "Female" ? femaleEyeColors : maleEyeColors
+        )[Math.floor(random() * 3)];
         const irisColor = irisColors[Math.floor(random() * irisColors.length)];
 
         container.dataset.owlColor = owlBodyColor;
 
-        // --- NEW: Calculate dynamic dimensions based on the bodyWidthFactor ---
+        // --- Dynamic Dimensions ---
         const bodyRx = 40 * bodyWidthFactor;
         const bellyRx = 28 * bodyWidthFactor;
         const wingSeparation = 28 * bodyWidthFactor;
@@ -346,56 +427,91 @@ import "../styles/global.css";
         const earSeparation = 35 * bodyWidthFactor;
         const feetSeparation = 10 * bodyWidthFactor;
 
-        // --- NEW: Prepare filter attribute if the owl is puffy ---
+        // --- SVG Part Generation ---
         const filterAttribute = isPuffy ? 'filter="url(#puffy-filter)"' : "";
 
-        // --- SVG Generation (Now fully dynamic) ---
+        // RESTORED: Belly pattern logic
+        let bellyPatternSvg = "";
+        if (hasBellyPattern) {
+          const patternType = random() > 0.5 ? "spots" : "stripes";
+          const patternColor = owlBodyColor;
+          const spotSize = 1.5 + random() * 1;
+          if (patternType === "spots") {
+            bellyPatternSvg = `
+                    <circle cx="${60 - bellyRx * 0.3}" cy="95" r="${spotSize}" fill="${patternColor}" opacity="0.6"/>
+                    <circle cx="${60 + bellyRx * 0.3}" cy="95" r="${spotSize}" fill="${patternColor}" opacity="0.6"/>
+                    <circle cx="60" cy="105" r="${spotSize}" fill="${patternColor}" opacity="0.6"/>`;
+          } else {
+            bellyPatternSvg = `
+                    <line x1="${60 - bellyRx * 0.5}" y1="95" x2="${60 + bellyRx * 0.5}" y2="95" stroke="${patternColor}" stroke-width="2" opacity="0.6"/>
+                    <line x1="${60 - bellyRx * 0.5}" y1="105" x2="${60 + bellyRx * 0.5}" y2="105" stroke="${patternColor}" stroke-width="2" opacity="0.6"/>`;
+          }
+        }
+
+        const eyelashes =
+          gender === "Female"
+            ? `<!-- Left Eyelash -->
+             <path d="M ${60 - eyeSeparation - eyeSize * 0.7},${60 - eyeSize * 0.5} C ${60 - eyeSeparation - eyeSize},${60 - eyeSize} ${60 - eyeSeparation - eyeSize * 1.3},${60 - eyeSize * 0.8}" stroke="${wingColor}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+             <!-- Right Eyelash (Fixed coordinates) -->
+             <path d="M ${60 + eyeSeparation + eyeSize * 0.7},${60 - eyeSize * 0.5} C ${60 + eyeSeparation + eyeSize},${60 - eyeSize} ${60 + eyeSeparation + eyeSize * 1.3},${60 - eyeSize * 0.8}" stroke="${wingColor}" stroke-width="1.5" fill="none" stroke-linecap="round"/>`
+            : "";
+
+        // NEW: Forehead rune logic
+        let runeSvg = "";
+        if (hasRune) {
+          const runes = [
+            `<circle cx="60" cy="45" r="3" stroke="${wingColor}" stroke-width="1.5" fill="none"/>`, // Circle Rune
+            `<path d="M 60 42 L 57 48 L 63 48 Z" fill="${wingColor}"/>`, // Triangle Rune
+            `<path d="M 58 42 L 62 48 M 62 42 L 58 48" stroke="${wingColor}" stroke-width="2" stroke-linecap="round"/>`, // 'X' Rune
+          ];
+          runeSvg = runes[Math.floor(random() * runes.length)];
+        }
+
+        // NEW: Cheek blush logic
+        const blushSvg = hasCheekBlush
+          ? `<ellipse cx="${60 - eyeSeparation - eyeSize * 0.5}" cy="72" rx="5" ry="3" fill="${blushColor}" />
+             <ellipse cx="${60 + eyeSeparation + eyeSize * 0.5}" cy="72" rx="5" ry="3" fill="${blushColor}" />`
+          : "";
+
+        // --- Final SVG Assembly ---
         const svg = `
 <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Gradient for body volume (unchanged) -->
     <radialGradient id="bodyGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-      <stop offset="0%" stop-color="${owlBodyColor}" stop-opacity="0.7" />
-      <stop offset="100%" stop-color="${owlBodyColor}" />
+      <stop offset="0%" stop-color="${owlBodyColor}" stop-opacity="0.7" /><stop offset="100%" stop-color="${owlBodyColor}" />
     </radialGradient>
-    
-    <!-- NEW: SVG filter for "puffy" feather effect, only added if needed -->
-    ${
-      isPuffy
-        ? `
-    <filter id="puffy-filter">
-      <feTurbulence type="fractalNoise" baseFrequency="${puffinessFrequency}" numOctaves="3" result="turbulence"/>
-      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="${puffinessScale}" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-    `
-        : ""
-    }
+    ${isPuffy ? `<filter id="puffy-filter"><feTurbulence type="fractalNoise" baseFrequency="${0.05 + random() * 0.05}" numOctaves="3" result="turbulence"/><feDisplacementMap in="SourceGraphic" in2="turbulence" scale="${5 + random() * 5}" xChannelSelector="R" yChannelSelector="G"/></filter>` : ""}
   </defs>
 
-  <!-- Body -->
+  <!-- Body & Wings -->
   <ellipse cx="60" cy="85" rx="${bodyRx}" ry="45" fill="url(#bodyGradient)" ${filterAttribute} />
-
-  <!-- Wings on the sides -->
   <ellipse cx="${60 - wingSeparation}" cy="85" rx="15" ry="30" fill="${wingColor}" transform="rotate(-10 ${60 - wingSeparation} 85)" ${filterAttribute} />
   <ellipse cx="${60 + wingSeparation}" cy="85" rx="15" ry="30" fill="${wingColor}" transform="rotate(10 ${60 + wingSeparation} 85)" ${filterAttribute} />
   
-  <!-- Belly -->
+  <!-- Belly & Decorations -->
   <ellipse cx="60" cy="95" rx="${bellyRx}" ry="32" fill="${bellyColor}" opacity="0.9"/>
-  
-  <!-- Eyes -->
+  ${bellyPatternSvg}
+  ${blushSvg}
+
+  <!-- Face -->
   <circle cx="${60 - eyeSeparation}" cy="60" r="${eyeSize}" fill="${eyeColor}" />
   <circle cx="${60 + eyeSeparation}" cy="60" r="${eyeSize}" fill="${eyeColor}" />
   <circle cx="${60 - eyeSeparation}" cy="60" r="${eyeSize / 2}" fill="${irisColor}" />
   <circle cx="${60 + eyeSeparation}" cy="60" r="${eyeSize / 2}" fill="${irisColor}" />
+  <!-- NEW: Eye Glints -->
+  <circle cx="${60 - eyeSeparation + eyeSize * 0.25}" cy="${60 - eyeSize * 0.25}" r="${eyeSize * 0.15}" fill="white" />
+  <circle cx="${60 + eyeSeparation + eyeSize * 0.25}" cy="${60 - eyeSize * 0.25}" r="${eyeSize * 0.15}" fill="white" />
+
+  ${eyelashes}
   
-  <!-- Beak -->
   <polygon points="56,70 64,70 60,78" fill="${beakAndFeetColor}" />
 
-  <!-- Upward-pointing ear tufts -->
+  <!-- Head & Ears -->
+  ${runeSvg}
   <polygon points="${60 - earSeparation - 10},50 ${60 - earSeparation},30 ${60 - earSeparation + 5},50" fill="${wingColor}" />
   <polygon points="${60 + earSeparation + 10},50 ${60 + earSeparation},30 ${60 + earSeparation - 5},50" fill="${wingColor}" />
 
-  <!-- Feet at the bottom -->
+  <!-- Feet -->
   <path d="M${60 - feetSeparation - 5},128 Q${60 - feetSeparation},135 ${60 - feetSeparation + 5},128" stroke="${beakAndFeetColor}" stroke-width="3" fill="none" stroke-linecap="round" />
   <path d="M${60 + feetSeparation - 5},128 Q${60 + feetSeparation},135 ${60 + feetSeparation + 5},128" stroke="${beakAndFeetColor}" stroke-width="3" fill="none" stroke-linecap="round" />
 </svg>`;
@@ -424,13 +540,6 @@ import "../styles/global.css";
           seedDisplay.textContent = stringSeed; // Display the memorable string
         }
       }
-
-      const initialHeroSeed = generateMemorableSeed();
-      const initialCanvasSeed = generateMemorableSeed();
-      forgeAndDisplay(heroContainer, initialHeroSeed);
-      forgeAndDisplay(owlCanvas, initialCanvasSeed);
-      makeOwlInteractive(heroContainer);
-      makeOwlInteractive(owlCanvas);
 
       // UPDATED: Button click logic handles strings
       regenBtn.addEventListener("click", () => {
@@ -467,6 +576,65 @@ import "../styles/global.css";
       closeModalBtn.addEventListener("click", () => {
         shareModal.classList.add("hidden");
       });
+
+      if (saveBtn) {
+        const spinner = saveBtn.querySelector("svg");
+        const buttonText = saveBtn.querySelector(".button-text");
+
+        saveBtn.addEventListener("click", async () => {
+          // --- 1. Set Loading State ---
+          saveBtn.disabled = true;
+          spinner.classList.remove("hidden");
+          buttonText.textContent = "Saving...";
+
+          const currentSeed = seedDisplay.textContent;
+          const currentGender = owlCanvas.dataset.owlGender;
+
+          try {
+            const response = await fetch("https://form-handler-api.onrender.com/owls/", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                seed: currentSeed,
+                gender: currentGender,
+              }),
+            });
+
+            if (response.ok) {
+              // --- 2. Set Success State ---
+              spinner.classList.add("hidden");
+              buttonText.textContent = "Saved!";
+              setTimeout(() => {
+                // Reset after 2 seconds
+                buttonText.textContent = "Save to Gallery";
+                saveBtn.disabled = false;
+              }, 2000);
+            } else {
+              // --- 3. Set Error State ---
+              const errorData = await response.json();
+              alert(`Error: ${errorData.detail}`);
+              spinner.classList.add("hidden");
+              buttonText.textContent = "Save to Gallery";
+              saveBtn.disabled = false;
+            }
+          } catch (error) {
+            // --- 4. Set Network Failure State ---
+            console.error("Failed to save owl:", error);
+            alert("Could not connect to the gallery. Please try again later.");
+            spinner.classList.add("hidden");
+            buttonText.textContent = "Save to Gallery";
+            saveBtn.disabled = false;
+          }
+        });
+      }
+
+      // Initial generation
+      const initialHeroSeed = generateMemorableSeed();
+      const initialCanvasSeed = generateMemorableSeed();
+      forgeAndDisplay(heroContainer, initialHeroSeed);
+      forgeAndDisplay(owlCanvas, initialCanvasSeed);
+      makeOwlInteractive(heroContainer);
+      makeOwlInteractive(owlCanvas);
     });
   </script>
 </MainLayout>

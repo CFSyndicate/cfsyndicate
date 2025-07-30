@@ -16,6 +16,11 @@
 
     <div class="hidden md:flex items-center gap-6 text-sm">
       <a
+        href={`${import.meta.env.BASE_URL}/aviary`}
+        class="text-forge-text hover:text-forge-accent transition-colors no-underline"
+        >Aviary</a
+      >
+      <a
         href={`${import.meta.env.BASE_URL}/showcase`}
         class="text-forge-text hover:text-forge-accent transition-colors no-underline"
         >Showcase</a
@@ -76,6 +81,10 @@
     </div>
   </nav>
   <div id="mobile-menu" class="hidden md:hidden">
+    <a
+      href={`${import.meta.env.BASE_URL}/aviary`}
+      class="block py-2 px-4 text-sm text-white hover:bg-gray-700">Aviary</a
+    >
     <a
       href={`${import.meta.env.BASE_URL}/showcase`}
       class="block py-2 px-4 text-sm text-white hover:bg-gray-700">Showcase</a
