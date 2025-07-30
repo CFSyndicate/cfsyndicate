@@ -7,7 +7,13 @@ import "../styles/global.css";
   <!-- Hero Section -->
   <section class="text-center py-20 md:py-32 px-6 bg-grid-pattern">
     <div class="w-24 h-32 mx-auto mb-6 text-5xl">
-      <span>🦉</span>
+      <div class="owl-container mx-auto w-24 h-32 mb-6 relative">
+        <img
+          src="/cfsyndicate/owl.svg"
+          alt="Owl"
+          class="owl-emoji w-full h-full"
+        />
+      </div>
     </div>
     <h1 class="text-4xl md:text-6xl mb-4 text-white">
       Concord Forge Syndicate
@@ -97,3 +103,34 @@ import "../styles/global.css";
     background-size: 3rem 3rem;
   }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const owl = document.querySelector(".owl-emoji");
+    // Removed eyelids and blinking logic
+
+    let clickCount = 0;
+
+    owl.addEventListener("click", () => {
+      clickCount++;
+
+      // Always do shake animation
+      owl.classList.add("owl-shake");
+      setTimeout(() => owl.classList.remove("owl-shake"), 400);
+
+      // On 5th click, do hoot animation
+      if (clickCount === 5) {
+        // Add hoot class
+        owl.classList.add("owl-hoot");
+
+        // Remove hoot class after animation ends
+        setTimeout(() => {
+          owl.classList.remove("owl-hoot");
+        }, 1000);
+
+        // Reset counter
+        clickCount = 0;
+      }
+    });
+  });
+</script>
