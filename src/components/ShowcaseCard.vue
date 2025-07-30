@@ -12,7 +12,7 @@ defineProps({
 <template>
   <a
     :href="url"
-    class="group block forge-card overflow-hidden transition-all duration-300 hover:border-forge-accent hover:-translate-y-1"
+    class="group block forge-card overflow-hidden transition-all duration-300 hover:border-forge-accent hover:-translate-y-1 no-underline"
   >
     <img :src="image" :alt="title" class="w-full h-48 object-cover" />
     <div class="p-1">

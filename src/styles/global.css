@@ -121,6 +121,14 @@
     animation: ember-float 5s ease-in-out infinite;
   }
 
+
+  .noselect {
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Old Firefox */
+    -ms-user-select: none;     /* IE10+ */
+  }
+
   .title-glow {
     text-shadow:
       /* Dark base stack */
@@ -176,8 +184,8 @@
   Hero background: forge image + grid
   =============================== */
 .bg-hero {
-  /* Layer 1: your 1024×1536 forge/anvil PNG
-     Layer 2: the orange grid pattern you already have */
+  /* Layer 1: 1024×1536 forge/anvil PNG
+     Layer 2: the orange grid pattern */
   background-image:
     url("/cfsyndicate/forge/forge.png"),
     linear-gradient(rgba(225, 93, 2, 0.1) 1px, transparent 1px),
