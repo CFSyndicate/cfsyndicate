@@ -301,31 +301,70 @@ import "../styles/global.css";
       const shareTwitter = document.getElementById("share-twitter");
       const shareBsky = document.getElementById("share-bsky");
 
-      // 2. Updated generator function that accepts a seed
       function generateOwl(container, numericSeed) {
         const random = mulberry32(numericSeed);
-        const bodyColors = ["#6b4226", "#4b3621", "#8b5e3c", "#5c4033"];
-        const owlBodyColor =
-          bodyColors[Math.floor(random() * bodyColors.length)];
 
-        // Pass the main color out for the background generator
-        container.dataset.owlColor = owlBodyColor;
-
-        // Palettes and random values using our new 'random()' function
+        // --- Palettes and Random Values ---
+        const bodyColors = [
+          "#6b4226",
+          "#4b3621",
+          "#8b5e3c",
+          "#5c4033",
+          "#42342b",
+        ];
         const bellyColors = ["#f4e1c1", "#e8d3a8", "#fff2d1", "#f5deb3"];
         const eyeColors = ["#fff", "#f9f9f9", "#fffcf2"];
         const irisColors = ["#2c2c2c", "#3b2f2f", "#1b1b1b", "#4a3c2a"];
+        const beakAndFeetColor = "#e09f3e";
 
-        const patternType = random() > 0.5 ? "spots" : "stripes";
-        const eyeSize = random() * 8 + 12;
-        const bodyColor = bodyColors[Math.floor(random() * bodyColors.length)];
+        const eyeSize = random() * 6 + 12; // Slightly smaller eye variation
+        const owlBodyColor =
+          bodyColors[Math.floor(random() * bodyColors.length)];
+        const wingColor = bodyColors[Math.floor(random() * bodyColors.length)]; // Can be same or different
         const bellyColor =
           bellyColors[Math.floor(random() * bellyColors.length)];
         const eyeColor = eyeColors[Math.floor(random() * eyeColors.length)];
         const irisColor = irisColors[Math.floor(random() * irisColors.length)];
 
-        // SVG generation (no changes here)
-        const svg = `<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="80" rx="40" ry="50" fill="${owlBodyColor}" /><ellipse cx="60" cy="90" rx="28" ry="35" fill="${bellyColor}" opacity="0.9"/><circle cx="40" cy="55" r="${eyeSize}" fill="${eyeColor}" /><circle cx="80" cy="55" r="${eyeSize}" fill="${eyeColor}" /><circle cx="40" cy="55" r="${eyeSize / 2}" fill="${irisColor}" /><circle cx="80" cy="55" r="${eyeSize / 2}" fill="${irisColor}" /><polygon points="55,70 65,70 60,80" fill="#e09f3e" /><polygon points="30,35 45,30 42,50" fill="${bodyColor}" /><polygon points="90,35 75,30 78,50" fill="${bodyColor}" />${patternType === "spots" ? `<circle cx="60" cy="100" r="2" fill="${bodyColor}" /><circle cx="50" cy="110" r="2" fill="${bodyColor}" /><circle cx="70" cy="110" r="2" fill="${bodyColor}" /><circle cx="60" cy="120" r="2" fill="${bodyColor}" />` : `<line x1="50" y1="95" x2="70" y2="95" stroke="${bodyColor}" stroke-width="2" /><line x1="50" y1="105" x2="70" y2="105" stroke="${bodyColor}" stroke-width="2" /><line x1="50" y1="115" x2="70" y2="115" stroke="${bodyColor}" stroke-width="2" />`}</svg>`;
+        container.dataset.owlColor = owlBodyColor;
+
+        // --- SVG Generation (Completely Redesigned) ---
+        const svg = `
+<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bodyGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="${owlBodyColor}" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="${owlBodyColor}" />
+    </radialGradient>
+  </defs>
+
+  <!-- Body -->
+  <ellipse cx="60" cy="85" rx="40" ry="45" fill="url(#bodyGradient)" />
+
+  <!-- NEW: Wings on the sides for more definition -->
+  <ellipse cx="32" cy="85" rx="15" ry="30" fill="${wingColor}" transform="rotate(-10 32 85)" />
+  <ellipse cx="88" cy="85" rx="15" ry="30" fill="${wingColor}" transform="rotate(10 88 85)" />
+  
+  <!-- Belly -->
+  <ellipse cx="60" cy="95" rx="28" ry="32" fill="${bellyColor}" opacity="0.9"/>
+  
+  <!-- Eyes -->
+  <circle cx="42" cy="60" r="${eyeSize}" fill="${eyeColor}" />
+  <circle cx="78" cy="60" r="${eyeSize}" fill="${eyeColor}" />
+  <circle cx="42" cy="60" r="${eyeSize / 2}" fill="${irisColor}" />
+  <circle cx="78" cy="60" r="${eyeSize / 2}" fill="${irisColor}" />
+  
+  <!-- Beak -->
+  <polygon points="56,70 64,70 60,78" fill="${beakAndFeetColor}" />
+
+  <!-- FIXED: Upward-pointing ear tufts -->
+  <polygon points="25,50 40,30 45,50" fill="${wingColor}" />
+  <polygon points="95,50 80,30 75,50" fill="${wingColor}" />
+
+  <!-- NEW: Feet at the bottom -->
+  <path d="M45,128 Q50,135 55,128" stroke="${beakAndFeetColor}" stroke-width="3" fill="none" stroke-linecap="round" />
+  <path d="M65,128 Q70,135 75,128" stroke="${beakAndFeetColor}" stroke-width="3" fill="none" stroke-linecap="round" />
+</svg>`;
         container.innerHTML = svg;
       }
 
