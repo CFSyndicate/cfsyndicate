@@ -16,6 +16,12 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
+<style>
+  .prose {
+    justify-items: center;
+  }
+</style>
+
 <ShowcaseLayout {...entry.data}>
   <Content />
 </ShowcaseLayout>

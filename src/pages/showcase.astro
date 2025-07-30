@@ -7,6 +7,12 @@ import ShowcaseCard from "../components/ShowcaseCard.vue";
 const projects = await getCollection("showcase");
 ---
 
+<style>
+  .prose {
+    justify-items: center;
+  }
+</style>
+
 <ShowcaseLayout title="Showcase">
   <div class="container mx-auto px-6 py-4">
     <div class="text-center mb-6">

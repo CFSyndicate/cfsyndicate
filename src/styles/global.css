@@ -550,6 +550,14 @@
 }
 
 /*
+  MDX CONTENT STYLING:
+  General styles for .prose class used in MDX rendered content.
+*/
+.prose p {
+  text-align: justify;
+}
+
+/*
   MDX LIST STYLING:
   Styles for both unordered and ordered lists to match the "Forge" theme.
 */
