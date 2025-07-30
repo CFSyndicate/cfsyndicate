@@ -301,8 +301,18 @@ import "../styles/global.css";
       const shareTwitter = document.getElementById("share-twitter");
       const shareBsky = document.getElementById("share-bsky");
 
+      // UPDATED: Generator function with dynamic shapes and "puffy" filter
       function generateOwl(container, numericSeed) {
         const random = mulberry32(numericSeed);
+
+        // --- NEW: Shape-modifying variables based on the seed ---
+        // 1. Body Width: Controls how fat or thin the owl is. (e.g., 0.8 to 1.2)
+        const bodyWidthFactor = 0.8 + random() * 0.4;
+        // 2. Puffiness: A 40% chance for an owl to be "puffy".
+        const isPuffy = random() > 0.6;
+        // Random values for the puffiness filter's intensity and texture
+        const puffinessScale = 5 + random() * 5; // How much to displace the edges
+        const puffinessFrequency = 0.05 + random() * 0.05; // The "grain" of the fluff
 
         // --- Palettes and Random Values ---
         const bodyColors = [
@@ -317,10 +327,10 @@ import "../styles/global.css";
         const irisColors = ["#2c2c2c", "#3b2f2f", "#1b1b1b", "#4a3c2a"];
         const beakAndFeetColor = "#e09f3e";
 
-        const eyeSize = random() * 6 + 12; // Slightly smaller eye variation
+        const eyeSize = random() * 6 + 12;
         const owlBodyColor =
           bodyColors[Math.floor(random() * bodyColors.length)];
-        const wingColor = bodyColors[Math.floor(random() * bodyColors.length)]; // Can be same or different
+        const wingColor = bodyColors[Math.floor(random() * bodyColors.length)];
         const bellyColor =
           bellyColors[Math.floor(random() * bellyColors.length)];
         const eyeColor = eyeColors[Math.floor(random() * eyeColors.length)];
@@ -328,42 +338,66 @@ import "../styles/global.css";
 
         container.dataset.owlColor = owlBodyColor;
 
-        // --- SVG Generation (Completely Redesigned) ---
+        // --- NEW: Calculate dynamic dimensions based on the bodyWidthFactor ---
+        const bodyRx = 40 * bodyWidthFactor;
+        const bellyRx = 28 * bodyWidthFactor;
+        const wingSeparation = 28 * bodyWidthFactor;
+        const eyeSeparation = 18 * bodyWidthFactor;
+        const earSeparation = 35 * bodyWidthFactor;
+        const feetSeparation = 10 * bodyWidthFactor;
+
+        // --- NEW: Prepare filter attribute if the owl is puffy ---
+        const filterAttribute = isPuffy ? 'filter="url(#puffy-filter)"' : "";
+
+        // --- SVG Generation (Now fully dynamic) ---
         const svg = `
 <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
   <defs>
+    <!-- Gradient for body volume (unchanged) -->
     <radialGradient id="bodyGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
       <stop offset="0%" stop-color="${owlBodyColor}" stop-opacity="0.7" />
       <stop offset="100%" stop-color="${owlBodyColor}" />
     </radialGradient>
+    
+    <!-- NEW: SVG filter for "puffy" feather effect, only added if needed -->
+    ${
+      isPuffy
+        ? `
+    <filter id="puffy-filter">
+      <feTurbulence type="fractalNoise" baseFrequency="${puffinessFrequency}" numOctaves="3" result="turbulence"/>
+      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="${puffinessScale}" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    `
+        : ""
+    }
   </defs>
 
   <!-- Body -->
-  <ellipse cx="60" cy="85" rx="40" ry="45" fill="url(#bodyGradient)" />
+  <ellipse cx="60" cy="85" rx="${bodyRx}" ry="45" fill="url(#bodyGradient)" ${filterAttribute} />
 
-  <!-- NEW: Wings on the sides for more definition -->
-  <ellipse cx="32" cy="85" rx="15" ry="30" fill="${wingColor}" transform="rotate(-10 32 85)" />
-  <ellipse cx="88" cy="85" rx="15" ry="30" fill="${wingColor}" transform="rotate(10 88 85)" />
+  <!-- Wings on the sides -->
+  <ellipse cx="${60 - wingSeparation}" cy="85" rx="15" ry="30" fill="${wingColor}" transform="rotate(-10 ${60 - wingSeparation} 85)" ${filterAttribute} />
+  <ellipse cx="${60 + wingSeparation}" cy="85" rx="15" ry="30" fill="${wingColor}" transform="rotate(10 ${60 + wingSeparation} 85)" ${filterAttribute} />
   
   <!-- Belly -->
-  <ellipse cx="60" cy="95" rx="28" ry="32" fill="${bellyColor}" opacity="0.9"/>
+  <ellipse cx="60" cy="95" rx="${bellyRx}" ry="32" fill="${bellyColor}" opacity="0.9"/>
   
   <!-- Eyes -->
-  <circle cx="42" cy="60" r="${eyeSize}" fill="${eyeColor}" />
-  <circle cx="78" cy="60" r="${eyeSize}" fill="${eyeColor}" />
-  <circle cx="42" cy="60" r="${eyeSize / 2}" fill="${irisColor}" />
-  <circle cx="78" cy="60" r="${eyeSize / 2}" fill="${irisColor}" />
+  <circle cx="${60 - eyeSeparation}" cy="60" r="${eyeSize}" fill="${eyeColor}" />
+  <circle cx="${60 + eyeSeparation}" cy="60" r="${eyeSize}" fill="${eyeColor}" />
+  <circle cx="${60 - eyeSeparation}" cy="60" r="${eyeSize / 2}" fill="${irisColor}" />
+  <circle cx="${60 + eyeSeparation}" cy="60" r="${eyeSize / 2}" fill="${irisColor}" />
   
   <!-- Beak -->
   <polygon points="56,70 64,70 60,78" fill="${beakAndFeetColor}" />
 
-  <!-- FIXED: Upward-pointing ear tufts -->
-  <polygon points="25,50 40,30 45,50" fill="${wingColor}" />
-  <polygon points="95,50 80,30 75,50" fill="${wingColor}" />
+  <!-- Upward-pointing ear tufts -->
+  <polygon points="${60 - earSeparation - 10},50 ${60 - earSeparation},30 ${60 - earSeparation + 5},50" fill="${wingColor}" />
+  <polygon points="${60 + earSeparation + 10},50 ${60 + earSeparation},30 ${60 + earSeparation - 5},50" fill="${wingColor}" />
 
-  <!-- NEW: Feet at the bottom -->
-  <path d="M45,128 Q50,135 55,128" stroke="${beakAndFeetColor}" stroke-width="3" fill="none" stroke-linecap="round" />
-  <path d="M65,128 Q70,135 75,128" stroke="${beakAndFeetColor}" stroke-width="3" fill="none" stroke-linecap="round" />
+  <!-- Feet at the bottom -->
+  <path d="M${60 - feetSeparation - 5},128 Q${60 - feetSeparation},135 ${60 - feetSeparation + 5},128" stroke="${beakAndFeetColor}" stroke-width="3" fill="none" stroke-linecap="round" />
+  <path d="M${60 + feetSeparation - 5},128 Q${60 + feetSeparation},135 ${60 + feetSeparation + 5},128" stroke="${beakAndFeetColor}" stroke-width="3" fill="none" stroke-linecap="round" />
 </svg>`;
         container.innerHTML = svg;
       }
