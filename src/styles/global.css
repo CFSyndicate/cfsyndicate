@@ -134,12 +134,20 @@
   }
 
   .punchline {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: larger;
      text-shadow:
       0 2px 4px rgba(0, 0, 0, 0.9),
       0 4px 12px rgba(0, 0, 0, 0.85),
       0 6px 20px rgba(0, 0, 0, 0.8),
       0 8px 32px rgba(0, 0, 0, 0.75),
       0 12px 48px rgba(0, 0, 0, 0.7); /* ← smoky aura */
+  }
+
+  .punchline > span {
+    display: block;
+    margin-bottom: 0.5rem;
   }
 
   /* 🔥 strong – forge ember */
