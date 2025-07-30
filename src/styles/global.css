@@ -123,6 +123,33 @@
 }
 
 /* ===============================
+  Hero background: forge image + grid
+  =============================== */
+.bg-hero {
+  /* Layer 1: your 1024×1536 forge/anvil PNG
+     Layer 2: the orange grid pattern you already have */
+  background-image:
+    url("/cfsyndicate/forge/forge.png"),
+    linear-gradient(rgba(225, 93, 2, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(225, 93, 2, 0.1) 1px, transparent 1px);
+
+  /* Center & cover the forge image,
+     then tile the grid on top: */
+  background-position: center center, center center, center center;
+  background-size: cover, 3rem 3rem, 3rem 3rem;
+
+  /* no-repeat for the forge image, grid should repeat */
+  background-repeat: no-repeat, repeat, repeat;
+}
+
+@media (min-width: 768px) {
+  .bg-hero {
+    /* Example: zoom less by using 80% instead of cover */
+    background-size: 60% auto, 3rem 3rem, 3rem 3rem;
+  }
+}
+
+/* ===============================
    🛠 UTILITIES
    =============================== */
 @layer utilities {
@@ -144,6 +171,7 @@
   animation: owl-bob 3s ease-in-out infinite;
   transform-origin: center bottom;
   cursor: pointer;
+  filter: drop-shadow(0 0 6px rgba(100, 40, 1, 0.7)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
 }
 
 /* idle breathing bob */
