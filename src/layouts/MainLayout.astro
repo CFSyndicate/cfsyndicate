@@ -40,6 +40,52 @@ const {
     </main>
     <Footer />
 
+    <div
+      id="share-modal"
+      class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-[#1a1a1a] p-6 rounded-lg border border-white/10 max-w-md w-full text-center relative"
+      >
+        <button
+          id="close-modal-btn"
+          class="absolute top-2 right-3 text-2xl text-gray-400 hover:text-white"
+          >×</button
+        >
+        <h3 class="text-2xl mb-4">Share Your Creation</h3>
+
+        <!-- The final generated image will appear here -->
+        <div id="share-image-wrapper" class="mb-4 bg-black rounded-md p-2">
+          <img
+            id="share-image-preview"
+            src=""
+            alt="Generated Owl Preview"
+            class="w-full h-auto rounded"
+          />
+        </div>
+
+        <div class="flex justify-center gap-4">
+          <a
+            id="share-twitter"
+            href="#"
+            target="_blank"
+            class="bg-black text-white px-4 py-2 rounded-lg"
+            >Share on X</a
+          >
+          <a
+            id="share-bsky"
+            href="#"
+            target="_blank"
+            class="bg-[#007AFF] text-white px-4 py-2 rounded-lg"
+            >Share on Bluesky</a
+          >
+        </div>
+        <p class="text-xs text-gray-500 mt-3">
+          Hint: Download the image first, then attach it to your post!
+        </p>
+      </div>
+    </div>
+
     <script>
       document.addEventListener("astro:after-swap", () => {
         const menuToggle = document.getElementById("menu-toggle");

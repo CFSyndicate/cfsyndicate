@@ -543,3 +543,8 @@
   font-weight: 600;
   text-shadow: 0 0 12px rgba(225, 93, 2, 0.8); /* A larger, stronger glow */
 }
+
+/* CSS for the Share Modal */
+#share-modal.hidden {
+  display: none;
+}
