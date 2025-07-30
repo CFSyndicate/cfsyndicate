@@ -1,0 +1,66 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "../layouts/MainLayout.astro";
+
+const about = (await getCollection("about"))[0];
+const { Content } = await about.render();
+---
+
+<MainLayout title={about.data.title} description={about.data.description}>
+  <div class="container mx-auto max-w-4xl px-6 py-12 md:py-20">
+    <h1
+      class="text-4xl font-extrabold md:text-6xl text-center text-balance mb-8
+               bg-gradient-to-r from-orange-400 to-red-500 text-transparent bg-clip-text"
+    >
+      {about.data.title}
+    </h1>
+    <div class="prose prose-lg lg:prose-xl prose-invert max-w-none">
+      <Content />
+    </div>
+  </div>
+</MainLayout>
+
+<style is:global>
+  /* Import Tailwind core layers */
+  @import "tailwindcss/theme.css" layer(theme);
+  @import "tailwindcss/preflight.css" layer(base);
+  @import "tailwindcss/utilities.css" layer(utilities);
+
+  /* Style the intro paragraph */
+  .prose > p: first-of-type {
+    @apply text-xl text-slate-300 text-center text-balance mb-12;
+  }
+
+  /* Style the section headings */
+  .prose h2 {
+    @apply text-xl font-bold text-slate-100 mb-3 text-center;
+    letter-spacing: -0.025em;
+  }
+
+  /* Apply responsive text sizes using @screen */
+  @screen md {
+    .prose > p:first-of-type {
+      @apply text-xl;
+    }
+    .prose h2 {
+      @apply text-2xl;
+    }
+  }
+
+  .prose hr {
+    @apply border-0 mx-auto my-12 md:my-16;
+    height: 2px;
+    width: 20rem;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      theme("colors.orange.500"),
+      transparent
+    );
+  }
+
+  /* General paragraph styling for readability */
+  .prose p {
+    @apply text-slate-300;
+  }
+</style>

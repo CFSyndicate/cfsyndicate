@@ -548,3 +548,43 @@
 #share-modal.hidden {
   display: none;
 }
+
+/*
+  MDX LIST STYLING:
+  Styles for both unordered and ordered lists to match the "Forge" theme.
+*/
+
+/* General styling for all list items for spacing and text color */
+.prose li {
+  @apply my-2; /* Adds vertical space between items */
+}
+
+.prose li p {
+  @apply m-0; /* Resets margin on paragraphs inside list items */
+}
+
+/* Unordered list (<ul>) styling */
+.prose ul > li {
+  @apply pl-6 relative; /* 1. Set the positioning context */
+}
+
+.prose ul > li::before {
+  /* This creates the custom "ember" bullet */
+  content: '';
+  @apply bg-orange-500 rounded-sm h-[0.4em] w-[0.4em];
+
+  /* 2. Position the marker absolutely within the li */
+  @apply absolute left-0 top-[0.65em];
+}
+
+/* Ordered list (<ol>) styling */
+.prose ol {
+  @apply pl-2; /* Minor adjustment for number alignment */
+}
+
+.prose ol > li::marker {
+  /*
+    This styles the numbers themselves.
+  */
+  @apply font-semibold text-slate-400;
+}
