@@ -36,9 +36,15 @@ const { title, description, tags } = Astro.props;
   /* Basic styling for content coming from MDX */
   .prose {
     line-height: 1.7;
+    @apply text-center;
   }
   .prose h3 {
     margin-top: 2em;
+    margin-bottom: 1em;
     font-weight: 700;
+    @apply text-center; /* ✅ centers h3 text */
+  }
+  .prose img {
+    @apply mx-auto; /* ✅ centers image */
   }
 </style>
