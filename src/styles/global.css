@@ -158,25 +158,54 @@
     margin-bottom: 0.5rem;
   }
 
-  /* 🔥 strong – forge ember */
   .highlight-strong {
-    color: #c64d00; /* darker forge orange */
+    background: linear-gradient(45deg, #E15D02, #FF7E29, #FFD27F);
     font-weight: 700;
     text-shadow: 0 0 6px rgba(198, 77, 0, 0.7), 0 0 12px rgba(198, 77, 0, 0.5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+      0 0 6px rgba(225, 93, 2, 0.8),
+      0 0 12px rgba(255, 126, 41, 0.6),
+      0 0 20px rgba(255, 210, 127, 0.4);
+    animation: ember-flicker 2s infinite ease-in-out;
   }
 
-  /* ⚙️ sharp – steel / metal */
   .highlight-sharp {
-    color: #b0b0b0; /* metallic silver-gray */
+    background: linear-gradient(145deg, #f0f0f0, #a8a8a8, #5a5a5a);
     font-weight: 700;
-    text-shadow: 0 0 6px rgba(176, 176, 176, 0.7), 0 0 10px rgba(100, 100, 100, 0.5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+      0 1px 1px rgba(255,255,255,0.6),
+      0 2px 2px rgba(0,0,0,0.4);
+  }
+
+  .highlight-solutions {
+    color: #ffffff;
+    text-shadow:
+      0 0 6px rgba(173, 216, 230, 0.7),
+      0 0 14px rgba(173, 216, 230, 0.5),
+      0 0 22px rgba(255, 255, 255, 0.6);
+    font-weight: 700;
+  }
+
+  @keyframes ember-flicker {
+    0%, 100% { text-shadow:
+      0 0 6px rgba(225, 93, 2, 0.8),
+      0 0 12px rgba(255, 126, 41, 0.6),
+      0 0 20px rgba(255, 210, 127, 0.4);
+    }
+    50% { text-shadow:
+      0 0 8px rgba(225, 93, 2, 1),
+      0 0 16px rgba(255, 126, 41, 0.8),
+      0 0 26px rgba(255, 210, 127, 0.6);
+    }
   }
 
   /* 💡 solutions – white clarity */
   .highlight-solutions {
     color: #ffffff;
-    font-weight: 700;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 16px rgba(255, 255, 255, 0.5);
   }
 }
 
