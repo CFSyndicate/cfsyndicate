@@ -466,22 +466,25 @@
   position: relative;
 }
 
-.owl-emoji {
+/* Base styling and IDLE animation for the hero owl container */
+#hero-owl {
   animation: owl-bob 3s ease-in-out infinite;
   transform-origin: center bottom;
   cursor: pointer;
   filter: drop-shadow(0 0 6px rgba(100, 40, 1, 0.7)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
 }
 
-/* idle breathing bob */
+/* The SVG inside should just fill the container and not be clickable */
+#hero-owl svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Clicks pass through to the parent #hero-owl */
+}
+
+/* Idle breathing bob keyframes (Only one definition is needed) */
 @keyframes owl-bob {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-3px) scale(1.02); }
-}
-
-/* shake + puff */
-.owl-shake {
-  animation: owl-shake-puff 0.4s ease-in-out;
 }
 
 @keyframes owl-shake-puff {
@@ -492,38 +495,51 @@
   100% { transform: rotate(0) scale(1); }
 }
 
- /* Hoot animation */
-@keyframes owl-hoot {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  25% {
-    transform: rotate(10deg) scale(1.05);
-  }
-  50% {
-    transform: rotate(-10deg) scale(1.05);
-  }
-  75% {
-    transform: rotate(8deg) scale(1.03);
-  }
-  100% {
-    transform: rotate(0deg) scale(1);
-  }
+/* In your CSS, update these two rules */
+#hero-owl.owl-shake,
+#owlCanvas.owl-shake {
+  animation: owl-shake-puff 0.4s ease-in-out;
 }
 
-.owl-hoot {
+#hero-owl.owl-hoot,
+#owlCanvas.owl-hoot {
   animation: owl-hoot 1s ease-in-out 1;
 }
 
-.procedural-owl, #hero-owl svg, #owlCanvas svg {
+@keyframes owl-hoot {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(10deg) scale(1.05); }
+  50% { transform: rotate(-10deg) scale(1.05); }
+  75% { transform: rotate(8deg) scale(1.03); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* --- Styles for the bottom generator (optional, kept for consistency) --- */
+#owlCanvas {
+  animation: owl-bob 3s ease-in-out infinite;
+  transform-origin: center bottom;
+  filter: drop-shadow(0 0 6px rgba(100, 40, 1, 0.7)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
+}
+
+#owlCanvas svg {
   width: 100%;
   height: 100%;
-  animation: owl-bob var(--bob-speed, 3s) ease-in-out infinite;
-  transform-origin: center bottom;
-  cursor: pointer;
-  filter: drop-shadow(0 0 6px rgba(100,40,1,0.7)) drop-shadow(0 0 10px rgba(0,0,0,0.8));
 }
-@keyframes owl-bob {
-  0%,100%{transform:translateY(0) scale(1);}
-  50%{transform:translateY(-3px) scale(1.02);}
+
+/* Add this to your CSS for the regeneration animation */
+.swoosh-out { animation: swoosh-out 0.3s ease-in forwards; }
+.swoosh-in  { animation: swoosh-in 0.3s ease-out; }
+
+@keyframes swoosh-out {
+  to { transform: scale(0) rotate(-30deg); opacity: 0; }
+}
+@keyframes swoosh-in {
+  from { transform: scale(0) rotate(30deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.highlight-strong-subtle {
+  color: #f08a40; /* A brighter, more vibrant orange */
+  font-weight: 600;
+  text-shadow: 0 0 12px rgba(225, 93, 2, 0.8); /* A larger, stronger glow */
 }
