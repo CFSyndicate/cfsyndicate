@@ -15,7 +15,7 @@ defineProps({
     class="group block forge-card overflow-hidden transition-all duration-300 hover:border-forge-accent hover:-translate-y-1"
   >
     <img :src="image" :alt="title" class="w-full h-48 object-cover" />
-    <div class="p-6">
+    <div class="p-1">
       <h3
         class="text-xl font-bold text-white mb-2 group-hover:text-forge-accent transition-colors"
       >
